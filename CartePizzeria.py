@@ -63,30 +63,3 @@ class CartePizzeria:
 
 class CartePizzeriaException(Exception):
     pass
-
-
-if __name__ == "__main__":
-
-    pizza1 = Pizza("Margarita", 8.5, "Tomate, mozzarella", ["tomate", "mozzarella"], "tomate")
-    boisson1 = Boisson("Coca-Cola", 2.5, False)
-    dessert1 = Dessert("Tiramisu", 5.0, ["mascarpone", "café"], True)
-    
-    carte = CartePizzeria()
-    print(carte.is_empty())  # True
-    
-    carte.add(pizza1)
-    carte.add(boisson1)
-    carte.add(dessert1)
-    
-    print(carte.is_empty())  # False
-    print(carte.nb_pizzas()) # 1
-    print(carte.nb_drinks()) # 1
-    print(carte.nb_desserts())  # 1
-    
-    carte.remove("Tiramisu")
-    print(carte.nb_desserts())  # 0
-
-    carte.remove("Coca-Cola")
-    carte.remove("Margarita")
-    print(carte.is_empty())  # True
-
