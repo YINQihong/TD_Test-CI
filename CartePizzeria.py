@@ -55,11 +55,17 @@ class CartePizzeria:
             self.desserts[element.nom] = element 
 
     def remove(self, nom):
-        for collection in [self.pizzas, self.boissons, self.desserts]:
-            if nom in collection:
-                del collection[nom]
-            return  # Suppression réussie
-        raise CartePizzeriaException(f"L'élément '{nom}' n'existe pas dans la carte.")
+        if nom in self.pizzas:
+            del self.pizzas[nom]
 
+        elif nom in self.boissons: 
+            del self.boissons[nom]
+
+        elif nom in self.desserts: 
+            del self.desserts[nom]
+
+        else: 
+            raise CartePizzeriaException(f"L'element {nom} n'existe pas dans la carte")
+        
 class CartePizzeriaException(Exception):
     pass
