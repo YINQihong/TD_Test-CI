@@ -41,31 +41,25 @@ class CartePizzeria:
     
     def add(self,element):
         if isinstance(element, Pizza):
-            if any(pizza == element for pizza in self.pizzas):
+            if element.nom in self.pizzas:
                 raise CartePizzeriaException(f"La pizza '{element.nom}' est déjà présente dans la carte.")
             self.pizzas[element.nom] = element
 
         if isinstance(element, Boisson):
-            if any(boisson == element for boisson in self.boissons):
+            if element.nom in self.boissons:
                 raise CartePizzeriaException(f"Le boisson '{element.nom}' est déjà présente dans la carte.")
             self.boissons[element.nom] = element
         if isinstance(element, Dessert):
-            if any(dessert == element for dessert in self.desserts):
+            if element.nom in self.desserts:
                 raise CartePizzeriaException(f"Le dessert '{element.nom}' est déjà présente dans la carte.")
             self.desserts[element.nom] = element 
 
-    def remove(self,nom):
-        if nom in self.pizzas:
-            del self.pizzas[nom]
-
-        elif nom in self.boissons: 
-            del self.boissons[nom]
-
-        elif nom in self.desserts: 
-            del self.desserts[nom]
-
-        else: 
-            raise CartePizzeriaException(f"L'element {nom} n'existe pas dans la carte")
+    def remove(self, nom):
+        for collection in [self.pizzas, self.boissons, self.desserts]:
+            if nom in collection:
+                del collection[nom]
+            return  # Suppression réussie
+        raise CartePizzeriaException(f"L'élément '{nom}' n'existe pas dans la carte.")
 
 class CartePizzeriaException(Exception):
     pass
